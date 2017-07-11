@@ -2,12 +2,14 @@ const express = require( 'express' );
 const bodyParser = require( 'body-parser' );
 const request = require( 'request' );
 const app = express();
-const port = 3000;
-const apiKey = ''; // Enter API key here
+const port = process.env.PORT || 3000;
+const apiKey = '06b45bef46b527ac6cf299802650ff06'; // Enter API key from here https://home.openweathermap.org/api_keys
 
 app.set( 'view engine', 'ejs' );
-app.use( express.static( 'public/' ) );
+app.use( express.static( __dirname + '/public' ) );
 app.use( bodyParser.urlencoded( { extended: true } ) );
+app.locals.weather = '';
+app.locals.error = '';
 
 app.get( '/', ( req, res ) => {
     res.render( 'index' );
